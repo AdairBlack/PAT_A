@@ -1,31 +1,49 @@
+#pragma warning(disable:4996)
+#pragma warning(disable:6031)
 #include <cstdio>
+#include <cstring>
 #include <algorithm>
+#include <cmath>
+
 using namespace std;
-int main(){
-    int a, b, c, remainder, count = 0;
-    int ans[10];
-    scanf("%d%d", &a, &b);
-    c = a + b;
-    if(c == 0){
-        printf("0\n");
-        return 0;
-    }
-    if(c < 0){
-        printf("-");
-        c = -c;
-    }
-    while(c != 0){
-        ans[count++] = c % 10;
-        c /= 10;
-    }
-    remainder = count % 3;
-    reverse(ans, ans + count);
-    for(int i = 0; i < count; i++){
-        if((i - remainder == 0 || ((i - remainder) % 3 == 0)) && i != 0){
-            printf(",");
-        }
-        printf("%d", ans[i]);
-    }
-    printf("\n");
-    return 0;
+
+int main()
+{
+	int a = 0, b = 0, sum = 0, count = 0, posNeg = 0;
+	int res[5] = { 0 };
+	scanf("%d %d", &a, &b);
+	sum = a + b;
+	if (0 <= sum)
+	{
+		posNeg = 1;
+	}
+	sum = abs(sum);
+	if (0 == sum)
+	{
+		printf("0\n");
+		return 0;
+	}
+	while (sum != 0)
+	{
+		res[count] = abs(sum % 1000);
+		sum /= 1000;
+		count++;
+	}
+	for (int i = (count - 1); i >= 0; i--)
+	{
+		if (((count - 1) == i) && (0 == posNeg))
+		{
+			printf("-");
+		}
+		if ((count - 1) == i)
+		{
+			printf("%d", res[i]);
+		}
+		else {
+			printf(",%03d", res[i]);
+		}
+	}
+	printf("\n");
+	return 0;
 }
+
